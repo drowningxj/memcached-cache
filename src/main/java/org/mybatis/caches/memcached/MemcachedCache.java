@@ -92,7 +92,11 @@ public final class MemcachedCache implements Cache {
      */
     @Override
     public void putObject(Object key, Object value) {
-        MEMCACHED_CLIENT.putObject(key, value, this.id);
+        if(value == null) {
+    		MEMCACHED_CLIENT.removeObject(key);
+    	}else {
+    		MEMCACHED_CLIENT.putObject(key, value, this.id);
+    	}
     }
 
     /**
